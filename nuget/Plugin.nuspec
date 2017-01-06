@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata minClientVersion="2.8.1">
         <id>XAnimations</id>
-        <version>$version$</version>
+        <version>0.9</version>
         <title>Animation helpers for Xamarin</title>
         <authors>Brian Donovan-Smith</authors>
         <owners>Brian Donovan-Smith</owners>
@@ -22,7 +22,7 @@
     </metadata>
     <files>
         <!-- Xamarin.Android -->
-        <file src="XAnimations\XAnimations\XAnimations.Droid\bin\Release\XAnimations.dll" target="lib\MonoAndroid10\XAnimations.dll" />
-        <file src="XAnimations\XAnimations\XAnimations.Droid\bin\Release\XAnimations.pdb" target="lib\MonoAndroid10\XAnimations.pdb" />
+        <file src="..\XAnimations\XAnimations.Droid\bin\Release\XAnimations.dll" target="lib\MonoAndroid10\XAnimations.dll" />
+        <file src="..\XAnimations\XAnimations.Droid\bin\Release\XAnimations.pdb" target="lib\MonoAndroid10\XAnimations.pdb" />
     </files>
 </package>
