@@ -1,54 +1,60 @@
-## Animation library for Xamarin
+# XAnimations
 
-Add awesome animations to Xamarin Native apps
+XAnimations gives Xamarin developers some helpful animations which they can use for Xamarin Native, and Xamarin.Forms
 
-![](https://github.com/brainoffline/XAnimations/blob/master/XAnimations.gif?raw=true)
+[![Twitter chat](https://twitter.com/brainoffline)](https://twitter.com/brainoffline)
 
-### Setup
-* Available on NuGet: http://www.nuget.org/packages/XAnimations
-* Install into your Xamarin Native project.
+## Build Status
 
-**Platform Support**
+| Build Server | Type  | Platform | Status  |
+|--------------|-------|----------|---------|
+|              |       |          |         |
+|              | Tests |          |         |
 
-|Platform|Supported|Version|
-| ------------------- | :-----------: | :------------------: |
-|Xamarin.iOS|Soon||
-|Xamarin.Android|Yes|API 19+|
-|Windows 10 UWP|Soon||
-|Xamarin.Mac|Soon||
+## Installation
+XAnimations is available in two varieties:
+* XAnimations for Xamarin Native NuGet Official Releases: [![NuGet](https://img.shields.io/nuget/vpre/Xanimations.svg?label=NuGet)](https://www.nuget.org/packages/Xanimations)
+* XAnimation.Forms NuGet Official Releases: [![NuGet](https://img.shields.io/nuget/vpre/Xanimation.Forms.svg?label=NuGet)](https://www.nuget.org/packages/Xanimation.Forms)
 
+## Documentation
 
-### API Usage
+Browse our [full documentation for XAnimation](https://github.com/brainoffline/XAnimations/wiki).
 
+## Supported Platforms
+XAnimations is focused on the following platforms:
+ - iOS (11+ is the latest supported major version)
+ - Android (6.0+/SDK 25/Marshmallow is the oldest supported version)
+ - UWP (Fall Creators Update+)
 
-**Start**
+## Current Animations:
+The following Animations are available in XAnimations Native:
 
-Begin playing an animation
+The following Animations are available in XAnimation.Forms:
+ 
+## Contributing
+Please read through our [Contribution Guide](CONTRIBUTING.md). We are not accepting new PRs for full features, however any issue that is marked as `up for grabs` are open for community contributions. We encourage creating new issues for bugs found during usage that the team will triage. Additionally, we are open for code refactoring suggestions in PRs.
+
+## Building XAnimations and XAnimation.Forms
+If building on Visual Studio 2017 you will need the following SDKs and workloads installed:
+
+### Workloads need:
+- Xamarin
+- .NET Core
+- UWP
+
+### You will need the following SDKs
+- Android 8.1 SDK Installed
+- UWP 10.0.16299 SDK Installed
+
+To build through the command line, navigate to where XAnimations.sln file exists then run:
 
 ```csharp
-titleView.CreateAnimator<BounceInAnimator>().Start();
+dotnet restore
+msbuild XAnimations.sln
 ```
 
-**Animate**
+## FAQ
+The Xanimations frequently asked questions can be found in the [FAQ on our Wiki](https://github.com/BrainOffline/XAnimations/wiki#faq).
 
-Wait for an animation to finish before continuing processing.
-
-```csharp
-await titleView.CreateAnimator<BounceInAnimator>().Animate();
-```
-
-### Other Stuff
-
-#### Inspiration
-[Android View Animations](https://github.com/daimajia/AndroidViewAnimations) by [daimajia](https://github.com/daimajia)
-
-[easings.net](http://easings.net/)
-
-
-#### Contributions
-Contributions are welcome! If you find a bug please report it and if you want a feature please report it.
-
-If you want to contribute code please file an issue and create a branch off of the current dev branch and file a pull request.
-
-#### License
-Under MIT, see LICENSE file.
+## License
+Please see the [License](LICENSE).
