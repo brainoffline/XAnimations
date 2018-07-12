@@ -1,4 +1,4 @@
-﻿using Xamarin.Forms;
+using Xamarin.Forms;
 
 namespace XAnimation.Forms
 {
@@ -10,16 +10,14 @@ namespace XAnimation.Forms
 
     public class HingeAnimation : AnimationDefinition
     {
-        public Side Side { get; set; }
-        public double Distance { get; set; }
+        public Side Side { get; set; } = Side.Left;
+        public double Distance { get; set; } = 700;
         public double? AnchorX { get; set; }
         public double? AnchorY { get; set; }
 
         public HingeAnimation()
         {
             Duration = 1000;
-            Side = Side.Left;
-            Distance = 700;
         }
 
         public override Animation CreateAnimation(VisualElement element)

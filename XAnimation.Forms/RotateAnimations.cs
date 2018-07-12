@@ -1,4 +1,4 @@
-﻿using Xamarin.Forms;
+using Xamarin.Forms;
 
 namespace XAnimation.Forms
 {
@@ -12,13 +12,11 @@ namespace XAnimation.Forms
     {
         public double? StartRotation { get; set; }
         public double? EndRotation { get; set; }
-        public Easing Easing { get; set; }
+        public Easing Easing { get; set; } = Easing.SinIn;
 
         public RotateAnimation()
         {
             Duration = 1000;
-            StartRotation = 0.0;
-            Easing = Easing.SinIn;
         }
 
         public override Animation CreateAnimation(VisualElement element)

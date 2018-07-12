@@ -1,4 +1,4 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace XAnimation.Forms
@@ -28,26 +28,23 @@ namespace XAnimation.Forms
                     int remaining = animationDefinition.RepeatCount;
 
                     if (animationDefinition.PauseBefore > 0)
-                    {
                         await Task.Delay(animationDefinition.PauseBefore);
-                    }
-                    animation.Commit(visualElement,
-                        animationId,
-                        16,
-                        animationDefinition.Duration,
-                        null,
-                        async (f, cancelled) =>
+
+                    animation.Commit(
+                        owner:visualElement,
+                        name: animationId,
+                        rate: 16,
+                        length: animationDefinition.Duration,
+                        easing: null,
+                        finished: async (f, cancelled) =>
                         {
                             if (!cancelled && animationDefinition.PauseAfter > 0)
-                            {
                                 await Task.Delay(animationDefinition.PauseAfter);
-                            }
+
                             if (cancelled || remaining <= 0)
-                            {
                                 tcs.SetResult(cancelled);
-                            }
                         },
-                        () =>
+                        repeat: () =>
                         {
                             remaining--;
                             return remaining > 0;
@@ -56,10 +53,13 @@ namespace XAnimation.Forms
             }
             else
             {
-                animation.Commit(visualElement, animationId, 16, animationDefinition.Duration, null, (f, a) =>
-                {
-                    tcs.SetResult(a);
-                });
+                animation.Commit(
+                    owner: visualElement,
+                    name: animationId,
+                    rate: 16,
+                    length: animationDefinition.Duration,
+                    easing: null,
+                    finished: (f, a) => tcs.SetResult(a));
             }
 
             return tcs.Task;

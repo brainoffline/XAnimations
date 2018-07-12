@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Xamarin.Forms;
 
 namespace XAnimation.Forms
@@ -27,13 +27,6 @@ namespace XAnimation.Forms
         protected AnimationDefinition()
         {
             Duration = 1000;
-        }
-
-        protected Tuple<double, double> GetTranslation(VisualElement element)
-        {
-            var x = element.TranslationX;
-            var y = element.TranslationY;
-            return new Tuple<double, double>(x, y);
         }
 
         public abstract Animation CreateAnimation(VisualElement element);

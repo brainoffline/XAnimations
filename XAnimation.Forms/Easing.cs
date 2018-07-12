@@ -1,5 +1,6 @@
-﻿using System;
+using System;
 using Xamarin.Forms;
+using static System.Math;
 
 namespace XAnimation.Forms
 {
@@ -99,9 +100,8 @@ namespace XAnimation.Forms
         public static Easing InOut = new Easing(x =>
         {
             if ((x *= 2) < 1)
-            {
                 return 0.5 * x * x * x * x;
-            }
+
             return -0.5 * ((x -= 2) * x * x * x - 2);
         });
     }
@@ -131,41 +131,26 @@ namespace XAnimation.Forms
     {
         public static Easing In = new Easing(x =>
         {
-            if (x == 0)
-            {
-                return 0;
-            }
-            if (x == 1)
-            {
-                return 1;
-            }
-            return 1 - Math.Cos(x * Math.PI / 2);
+            if (x.EqualsZero()) return 0;
+            if (x.EqualsOne()) return 1;
+
+            return 1 - Cos(x * PI / 2);
         });
 
         public static Easing Out = new Easing(x =>
         {
-            if (x == 0)
-            {
-                return 0;
-            }
-            if (x == 1)
-            {
-                return 1;
-            }
-            return Math.Sin(x * Math.PI / 2);
+            if (x.EqualsZero()) return 0;
+            if (x.EqualsOne()) return 1;
+
+            return Sin(x * PI / 2);
         });
 
         public static Easing InOut = new Easing(x =>
         {
-            if (x == 0)
-            {
-                return 0;
-            }
-            if (x == 1)
-            {
-                return 1;
-            }
-            return 0.5 * (1 - Math.Cos(Math.PI * x));
+            if (x.EqualsZero()) return 0;
+            if (x.EqualsOne()) return 1;
+
+            return 0.5 * (1 - Cos(PI * x));
         });
     }
 
@@ -174,24 +159,19 @@ namespace XAnimation.Forms
     /// </summary>
     internal class ExponentialEasing
     {
-        public static Easing In = new Easing(x => x == 0 ? 0 : Math.Pow(1024, x - 1));
-        public static Easing Out = new Easing(x => x == 1 ? 1 : 1 - Math.Pow(2, -10 * x));
+        public static Easing In = new Easing(x => x.EqualsZero() ? 0 : Pow(1024, x - 1));
+        public static Easing Out = new Easing(x => x.EqualsOne() ? 1 : 1 - Pow(2, -10 * x));
 
         public static Easing InOut = new Easing(x =>
         {
-            if (x == 0)
-            {
-                return 0;
-            }
-            if (x == 1)
-            {
-                return 1;
-            }
+            if (x.EqualsZero()) return 0;
+            if (x.EqualsOne()) return 1;
+
             if ((x *= 2) < 1)
             {
-                return 0.5 * Math.Pow(1024, x - 1);
+                return 0.5 * Pow(1024, x - 1);
             }
-            return 0.5 * (-Math.Pow(2, -10 * (x - 1)) + 2);
+            return 0.5 * (-Pow(2, -10 * (x - 1)) + 2);
         });
     }
 
@@ -200,16 +180,16 @@ namespace XAnimation.Forms
     /// </summary>
     internal class CircularEasing
     {
-        public static Easing In = new Easing(x => 1 - Math.Sqrt(1 - x * x));
-        public static Easing Out = new Easing(x => Math.Sqrt(1 - (--x * x)));
+        public static Easing In = new Easing(x => 1 - Sqrt(1 - x * x));
+        public static Easing Out = new Easing(x => Sqrt(1 - (--x * x)));
 
         public static Easing InOut = new Easing(x =>
         {
             if ((x *= 2) < 1)
             {
-                return -0.5 * (Math.Sqrt(1 - x * x) - 1);
+                return -0.5 * (Sqrt(1 - x * x) - 1);
             }
-            return 0.5 * (Math.Sqrt(1 - (x -= 2) * x) + 1);
+            return 0.5 * (Sqrt(1 - (x -= 2) * x) + 1);
         });
     }
 
@@ -220,16 +200,12 @@ namespace XAnimation.Forms
     {
         public static Easing In = new Easing(x =>
         {
-            double s = 0.0, a = 0.1, p = 0.4;
-            if (x == 0)
-            {
+            double s, a = 0.1, p = 0.4;
+            if (x.EqualsZero())
                 return 0;
-            }
-            if (x == 1)
-            {
+            if (x.EqualsOne())
                 return 1;
-            }
-            //if (!a || a < 1) { a = 1; s = p / 4; }
+
             if (a < 1)
             {
                 a = 1;
@@ -237,23 +213,19 @@ namespace XAnimation.Forms
             }
             else
             {
-                s = p * Math.Asin(1 / a) / (2 * Math.PI);
+                s = p * Asin(1 / a) / (2 * PI);
             }
-            return -(a * Math.Pow(2, 10 * (x -= 1)) * Math.Sin((x - s) * (2 * Math.PI) / p));
+            return -(a * Pow(2, 10 * (x -= 1)) * Sin((x - s) * (2 * PI) / p));
         });
 
         public static Easing Out = new Easing(x =>
         {
-            double s = 0.0, a = 0.1, p = 0.4;
-            if (x == 0)
-            {
+            double s, a = 0.1, p = 0.4;
+            if (x.EqualsZero())
                 return 0;
-            }
-            if (x == 1)
-            {
+            if (x.EqualsOne())
                 return 1;
-            }
-            //if (!a || a < 1) { a = 1; s = p / 4; }
+
             if (a < 1)
             {
                 a = 1;
@@ -261,23 +233,18 @@ namespace XAnimation.Forms
             }
             else
             {
-                s = p * Math.Asin(1 / a) / (2 * Math.PI);
+                s = p * Asin(1 / a) / (2 * PI);
             }
-            return (a * Math.Pow(2, -10 * x) * Math.Sin((x - s) * (2 * Math.PI) / p) + 1);
+            return (a * Pow(2, -10 * x) * Sin((x - s) * (2 * PI) / p) + 1);
         });
 
         public static Easing InOut = new Easing(x =>
         {
-            double s = 0.0, a = 0.1, p = 0.4;
-            if (x == 0)
-            {
+            double s, a = 0.1, p = 0.4;
+            if (x.EqualsZero())
                 return 0;
-            }
-            if (x == 1)
-            {
+            if (x.EqualsOne())
                 return 1;
-            }
-            //if (!a || a < 1) { a = 1; s = p / 4; }
             if (a < 1)
             {
                 a = 1;
@@ -285,13 +252,13 @@ namespace XAnimation.Forms
             }
             else
             {
-                s = p * Math.Asin(1 / a) / (2 * Math.PI);
+                s = p * Asin(1 / a) / (2 * PI);
             }
             if ((x *= 2) < 1)
             {
-                return -0.5 * (a * Math.Pow(2, 10 * (x -= 1)) * Math.Sin((x - s) * (2 * Math.PI) / p));
+                return -0.5 * (a * Pow(2, 10 * (x -= 1)) * Sin((x - s) * (2 * PI) / p));
             }
-            return a * Math.Pow(2, -10 * (x -= 1)) * Math.Sin((x - s) * (2 * Math.PI) / p) * 0.5 + 1;
+            return a * Pow(2, -10 * (x -= 1)) * Sin((x - s) * (2 * PI) / p) * 0.5 + 1;
         });
     }
 
@@ -322,22 +289,16 @@ namespace XAnimation.Forms
 
     internal class BounceEasing
     {
-        private static Func<double, double> Bounce = x =>
+        private static readonly Func<double, double> Bounce = x =>
         {
             if (x < (1 / 2.75))
-            {
                 return 7.5625 * x * x;
-            }
 
             if (x < (2 / 2.75))
-            {
                 return 7.5625 * (x -= (1.5 / 2.75)) * x + 0.75;
-            }
 
             if (x < (2.5 / 2.75))
-            {
                 return 7.5625 * (x -= (2.25 / 2.75)) * x + 0.9375;
-            }
 
             return 7.5625 * (x -= (2.625 / 2.75)) * x + 0.984375;
         };
@@ -348,9 +309,7 @@ namespace XAnimation.Forms
         public static Easing InOut = new Easing(x =>
         {
             if (x < 0.5)
-            {
                 return 0.5 - (Bounce(1 - (x * 2)) * 0.5);
-            }
 
             return Bounce(x * 2 - 1) * 0.5 + 0.5;
         });
@@ -358,24 +317,13 @@ namespace XAnimation.Forms
 
     public class PowerEasing
     {
-        private static Func<double, double, double> P = (x, p) => Math.Pow(x, p);
-
         private readonly double _power;
 
-        public PowerEasing(double power)
-        {
-            _power = power;
-        }
+        public PowerEasing(double power) => _power = power;
 
-        public Func<double, double> In
-        {
-            get { return x => Math.Pow(x, _power); }
-        }
+        public Func<double, double> In => x => Pow(x, _power);
 
-        public Func<double, double> Out
-        {
-            get { return x => 1 - Math.Pow(--x, _power); }
-        }
+        public Func<double, double> Out => x => 1 - Pow(--x, _power);
 
         public Func<double, double> InOut
         {
@@ -385,7 +333,7 @@ namespace XAnimation.Forms
                 {
                     if ((x *= 2) < 1)
                     {
-                        return 0.5 * (Math.Pow(x, _power));
+                        return 0.5 * (Pow(x, _power));
                     }
                     //return 0.5 + (0.5 * Math.Pow(--x, _power));     // I havn't found the formula yet
                     //return 1 - Math.Pow(--x, _power);
@@ -393,5 +341,11 @@ namespace XAnimation.Forms
                 };
             }
         }
+    }
+
+    static class Helpers
+    {
+        public static bool EqualsZero(this double f) => Abs(f) < float.Epsilon;
+        public static bool EqualsOne(this double f) => Abs(f - 1) < float.Epsilon;
     }
 }

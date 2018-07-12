@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Xamarin.Forms;
 
 namespace XAnimation.Forms
@@ -35,13 +35,10 @@ namespace XAnimation.Forms
             animation.WithConcurrent(f => element.Opacity = f, 0, 1, Easings.CubicOut);
 
             if (Math.Abs(DistanceX) > 0)
-            {
                 animation.WithConcurrent(f => element.TranslationX = f, element.TranslationX + DistanceX, element.TranslationX, Easings.CubicOut);
-            }
+
             if (Math.Abs(DistanceY) > 0)
-            {
                 animation.WithConcurrent(f => element.TranslationY = f, element.TranslationY + DistanceY, element.TranslationY, Easings.CubicOut);
-            }
 
             return animation;
         }
@@ -64,13 +61,10 @@ namespace XAnimation.Forms
             animation.WithConcurrent(f => element.Opacity = f, 1, 0);
 
             if (Math.Abs(DistanceX) > 0)
-            {
                 animation.WithConcurrent(f => element.TranslationX = f, element.TranslationX, element.TranslationX + DistanceX);
-            }
+
             if (Math.Abs(DistanceY) > 0)
-            {
                 animation.WithConcurrent(f => element.TranslationY = f, element.TranslationY, element.TranslationY + DistanceY);
-            }
 
             return animation;
         }

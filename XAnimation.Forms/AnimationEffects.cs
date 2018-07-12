@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -22,9 +22,7 @@ namespace XAnimation.Forms
                 child.PauseBefore = delay;
 
                 if (clear)
-                {
                     element.ClearTransforms(0);
-                }
                 list.Add(element.Animate(child));
                 delay += staggeredDelay;
             }
@@ -49,9 +47,7 @@ namespace XAnimation.Forms
                 child.PauseBefore = delay;
 
                 if (clear)
-                {
                     element.ClearTransforms(0);
-                }
                 list.Add(element.Animate(child));
                 delay += staggeredDelay;
             }
@@ -75,9 +71,7 @@ namespace XAnimation.Forms
                 child.PauseBefore = delay;
 
                 if (clear)
-                {
                     element.ClearTransforms(0);
-                }
                 list.Add(element.Animate(child));
                 delay += staggeredDelay;
             }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Xamarin.Forms;
 
 namespace XAnimation.Forms
@@ -20,9 +20,9 @@ namespace XAnimation.Forms
 
     public class CircleInAnimation : AnimationDefinition
     {
-        public CircleDirection FromDirection { get; set; }
-        public ZDirection FromZDirection { get; set; }
-        public double Distance { get; set; }
+        public CircleDirection FromDirection { get; set; } = CircleDirection.BottomLeft;
+        public ZDirection FromZDirection { get; set; } = ZDirection.Away;
+        public double Distance { get; set; } = 200;
         private double DistanceX { get; set; }
         private double DistanceY { get; set; }
 
@@ -30,11 +30,6 @@ namespace XAnimation.Forms
         {
             Duration = 400;
             OpacityFromZero = true;
-            FromDirection = CircleDirection.BottomLeft;
-            FromZDirection = ZDirection.Away;
-            Distance = 200;
-            DistanceX = 0;
-            DistanceY = 0;
         }
 
         public override Animation CreateAnimation(VisualElement element)
@@ -42,25 +37,10 @@ namespace XAnimation.Forms
             var animation = new Animation();
 
             if (FromZDirection != ZDirection.Steady)
-            {
-                animation.WithConcurrent(
-                    f => element.Scale = f,
-                    FromZDirection == ZDirection.Away ? 0.3 : 2.0,
-                    1,
-                    Easings.BackOut);
-            }
+                animation.WithConcurrent(f => element.Scale = f, FromZDirection == ZDirection.Away ? 0.3 : 2.0, 1, Easings.BackOut);
 
-            animation.WithConcurrent(
-                f => element.Rotation = f,
-                -90, 0, Easing.CubicIn);
-
-            animation.WithConcurrent(
-                f => element.Opacity = f,
-                0,
-                1,
-                null,
-                0,
-                0.25);
+            animation.WithConcurrent(f => element.Rotation = f, -90, 0, Easing.CubicIn);
+            animation.WithConcurrent(f => element.Opacity = f, 0, 1, null, 0, 0.25);
 
             switch (FromDirection)
             {
@@ -82,19 +62,8 @@ namespace XAnimation.Forms
                     break;
             }
 
-            animation.WithConcurrent(
-                f => element.TranslationX = f,
-                element.TranslationX + DistanceX,
-                element.TranslationX,
-                Easings.QuinticOut,
-                0,
-                0.7);
-
-            animation.WithConcurrent(
-                f => element.TranslationY = f,
-                element.TranslationY + DistanceY,
-                element.TranslationY,
-                Easings.BackOut);
+            animation.WithConcurrent(f => element.TranslationX = f, element.TranslationX + DistanceX, element.TranslationX, Easings.QuinticOut, 0, 0.7);
+            animation.WithConcurrent(f => element.TranslationY = f, element.TranslationY + DistanceY, element.TranslationY, Easings.BackOut);
 
             return animation;
         }
@@ -102,7 +71,7 @@ namespace XAnimation.Forms
 
     public class BounceInAnimation : AnimationDefinition
     {
-        public ZDirection FromDirection { get; set; }
+        public ZDirection FromDirection { get; set; } = ZDirection.Away;
         public double DistanceX { get; set; }
         public double DistanceY { get; set; }
 
@@ -110,9 +79,6 @@ namespace XAnimation.Forms
         {
             Duration = 400;
             OpacityFromZero = true;
-            FromDirection = ZDirection.Away;
-            DistanceX = 0;
-            DistanceY = 0;
         }
 
         public override Animation CreateAnimation(VisualElement element)
@@ -120,20 +86,14 @@ namespace XAnimation.Forms
             var animation = new Animation();
 
             if (FromDirection != ZDirection.Steady)
-            {
                 animation.WithConcurrent(f => element.Scale = f, FromDirection == ZDirection.Away ? 0.3 : 2.0, 1, Easings.BackOut);
-            }
 
             animation.WithConcurrent(f => element.Opacity = f, 0, 1, null, 0, 0.25);
 
             if (Math.Abs(DistanceX) > 0)
-            {
                 animation.WithConcurrent(f => element.TranslationX = f, element.TranslationX + DistanceX, element.TranslationX, Easings.BackOut);
-            }
             if (Math.Abs(DistanceY) > 0)
-            {
                 animation.WithConcurrent(f => element.TranslationY = f, element.TranslationY + DistanceY, element.TranslationY, Easings.BackOut);
-            }
 
             return animation;
         }
@@ -197,18 +157,14 @@ namespace XAnimation.Forms
 
     public class BounceOutAnimation : AnimationDefinition
     {
-        public ZDirection ToDirection { get; set; }
-        public double Amplitude { get; set; }
+        public ZDirection ToDirection { get; set; } = ZDirection.Away;
+        public double Amplitude { get; set; } = 0.4;
         public double DistanceX { get; set; }
         public double DistanceY { get; set; }
 
         public BounceOutAnimation()
         {
             Duration = 400;
-            ToDirection = ZDirection.Away;
-            Amplitude = 0.4;
-            DistanceX = 0;
-            DistanceY = 0;
         }
 
         public override Animation CreateAnimation(VisualElement element)
@@ -219,17 +175,11 @@ namespace XAnimation.Forms
             animation.WithConcurrent(f => element.Opacity = f, 1, 0, null, 0.5);
 
             if (ToDirection != ZDirection.Steady)
-            {
                 animation.WithConcurrent(f => element.Scale = f, 1, ToDirection == ZDirection.Away ? 0.3 : 2.0, Easings.BackIn);
-            }
             if (Math.Abs(DistanceX) > 0)
-            {
                 animation.WithConcurrent(f => element.TranslationX = f, element.TranslationX, element.TranslationX + DistanceX, Easings.BackIn);
-            }
             if (Math.Abs(DistanceY) > 0)
-            {
                 animation.WithConcurrent(f => element.TranslationY = f, element.TranslationY, element.TranslationY + DistanceY, Easings.BackIn);
-            }
 
             return animation;
         }

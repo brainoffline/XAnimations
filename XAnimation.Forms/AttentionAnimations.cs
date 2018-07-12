@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Xamarin.Forms;
 
 namespace XAnimation.Forms
@@ -18,9 +18,7 @@ namespace XAnimation.Forms
             var animation = new Animation();
 
             if (Count == 0)
-            {
                 Count = 2;
-            }
 
             var span = 0.5 / Count;
 
@@ -75,21 +73,17 @@ namespace XAnimation.Forms
 
             if (Math.Abs(DistanceY) > 0.001)
             {
-                //animation.WithConcurrent(f => element.TranslationY = f, element.TranslationY, element.TranslationY, Easings.CubicInOut, 0, 0.2);
                 animation.WithConcurrent(f => element.TranslationY = f, element.TranslationY, element.TranslationY + DistanceY, Easings.CubicInOut, 0.2, 0.4);
                 animation.WithConcurrent(f => element.TranslationY = f, element.TranslationY, element.TranslationY, Easings.CubicInOut, 0.4, 0.5);
                 animation.WithConcurrent(f => element.TranslationY = f, element.TranslationY, element.TranslationY + (DistanceY / 2), Easings.CubicInOut, 0.5, 0.6);
                 animation.WithConcurrent(f => element.TranslationY = f, element.TranslationY, element.TranslationY, Easings.CubicInOut, 0.6, 0.8);
-                //animation.WithConcurrent(f => element.TranslationY = f, element.TranslationY, element.TranslationY, Easings.CubicInOut, 0.8, 1.0);
             }
             if (Math.Abs(DistanceX) > 0.001)
             {
-                //animation.WithConcurrent(f => element.TranslationX = f, element.TranslationX, element.TranslationX, Easings.CubicInOut, 0, 0.2);
                 animation.WithConcurrent(f => element.TranslationX = f, element.TranslationX, element.TranslationX + DistanceX, Easings.CubicInOut, 0.2, 0.4);
                 animation.WithConcurrent(f => element.TranslationX = f, element.TranslationX, element.TranslationX, Easings.CubicInOut, 0.4, 0.5);
                 animation.WithConcurrent(f => element.TranslationX = f, element.TranslationX, element.TranslationX + (DistanceX / 2), Easings.CubicInOut, 0.5, 0.6);
                 animation.WithConcurrent(f => element.TranslationX = f, element.TranslationX, element.TranslationX, Easings.CubicInOut, 0.6, 0.8);
-                //animation.WithConcurrent(f => element.TranslationX = f, element.TranslationX, element.TranslationX, Easings.CubicInOut, 0.8, 1.0);
             }
             return animation;
         }
@@ -97,14 +91,8 @@ namespace XAnimation.Forms
 
     public class ShakeAnimation : AnimationDefinition
     {
-        public double DistanceX { get; set; }
+        public double DistanceX { get; set; } = 10;
         public double DistanceY { get; set; }
-
-        public ShakeAnimation()
-        {
-            DistanceX = 10;
-            DistanceY = 0;
-        }
 
         public override Animation CreateAnimation(VisualElement element)
         {
@@ -143,14 +131,8 @@ namespace XAnimation.Forms
 
     public class TadaAnimation : AnimationDefinition
     {
-        public double MinScale { get; set; }
-        public double MaxScale { get; set; }
-
-        public TadaAnimation()
-        {
-            MinScale = 0.9;
-            MaxScale = 1.1;
-        }
+        public double MinScale { get; set; } = 0.9;
+        public double MaxScale { get; set; } = 1.1;
 
         public override Animation CreateAnimation(VisualElement element)
         {
@@ -195,12 +177,7 @@ namespace XAnimation.Forms
 
     public class SwingAnimation : AnimationDefinition
     {
-        public double Distance { get; set; }
-
-        public SwingAnimation()
-        {
-            Distance = 15;
-        }
+        public double Distance { get; set; } = 15;
 
         public override Animation CreateAnimation(VisualElement element)
         {
@@ -221,12 +198,8 @@ namespace XAnimation.Forms
 
     public class WobbleAnimation : AnimationDefinition
     {
-        public double Distance { get; set; }
+        public double Distance { get; set; } = 25;
 
-        public WobbleAnimation()
-        {
-            Distance = 25;
-        }
         public override Animation CreateAnimation(VisualElement element)
         {
             var animation = new Animation();
@@ -254,12 +227,7 @@ namespace XAnimation.Forms
 
     public class PulseAnimation : AnimationDefinition
     {
-        public double MaxScale { get; set; }
-
-        public PulseAnimation()
-        {
-            MaxScale = 1.1;
-        }
+        public double MaxScale { get; set; } = 1.1;
 
         public override Animation CreateAnimation(VisualElement element)
         {
@@ -274,12 +242,7 @@ namespace XAnimation.Forms
 
     public class JumpAnimation : AnimationDefinition
     {
-        public double Distance { get; set; }
-
-        public JumpAnimation()
-        {
-            Distance = -20;
-        }
+        public double Distance { get; set; } = -20;
 
         public override Animation CreateAnimation(VisualElement element)
         {
